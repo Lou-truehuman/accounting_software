@@ -1,0 +1,41 @@
+name: ledger_book
+description: AI记账 - 本地记账与消费可视化应用
+publish_to: 'none'
+version: 1.5.0+6
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # 提供 MaterialLocalizations（日期选择器、长按菜单等系统组件的中文文案）。
+  # 缺失它会让 showDatePicker 构建失败，表现为弹层遮罩残留、页面卡死。
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  sqflite: ^2.0.3
+  path: ^1.8.0
+  path_provider: ^2.0.11
+  shared_preferences: ^2.0.15
+  intl: ^0.17.0
+  # 生成 .xlsx：账单导出功能用。
+  # 锁 2.0.4 —— 2.1.0+ 要求 collection ^1.17.0，而 Flutter 3.0 的
+  # flutter_test 锁死 collection 1.16.0，会产生版本冲突无法解析。
+  excel: 2.0.4
+  # 调起系统分享/保存面板，把导出的 Excel 交给用户选择存放位置。
+  # 锁 6.3.4 —— 7.x 起要求 Dart >=2.18。
+  share_plus: 6.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  # 仅测试用：让 SQLite 能在桌面/CI 上跑，用于验证 v1→v2 迁移。
+  # 锁 2.1.x：2.2.0+ 要求 Dart >=2.18，本项目跑在 Dart 2.17。
+  sqflite_common_ffi: 2.1.1+1
+  # 仅测试用：sqflite_common 提供 sqlite_api 里的 Database/ConflictAlgorithm 等类型
+  sqflite_common: ^2.4.0
+
+flutter:
+  uses-material-design: true
